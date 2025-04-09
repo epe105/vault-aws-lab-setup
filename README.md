@@ -27,7 +27,7 @@ Usage
 sudo vault server -config=/etc/vault.d/vault.hcl
 
 # Access Vault 
-https://lab-vault.<dns entry>:8200/
+https://vault.<dns entry>:8200/
 
 # Install HVAC and Ansible
 - python3 -m venv .venv
