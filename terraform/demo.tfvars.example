@@ -1,0 +1,6 @@
+email = ""
+keyname = ""
+redhat_username = ""
+redhat_password = ""
+vault_count = 1
+customer = "lab"

@@ -30,6 +30,6 @@ sudo vault server -config=/etc/vault.d/vault.hcl
 https://lab-vault.<dns entry>:8200/
 
 # Install HVAC and Ansible
-python3 -m venv .venv
-source .venv/bin/activate
-pip install ansible hvac
+- python3 -m venv .venv
+- source .venv/bin/activate
+- pip install ansible hvac
