@@ -1,0 +1,12 @@
+---
+- name: Vault Demo
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  tasks:
+    - name: Show Access Key
+      ansible.builtin.debug:
+        msg: "Access_Key: {{ lookup('ansible.builtin.env', 'AWS_ACCESS_KEY_ID') }}"
+    - name: Show Secret Key
+      ansible.builtin.debug:
+        msg: "Secret_Key: {{ lookup('ansible.builtin.env', 'AWS_SECRET_ACCESS_KEY') }}"
