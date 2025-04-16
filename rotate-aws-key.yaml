@@ -1,0 +1,61 @@
+---
+- name: Rotate AWS IAM user console password and access keys
+  hosts: localhost
+  vars:
+    iam_user: ""
+    new_password: ""  
+  tasks:
+  - name: Query existing IAM user access keys
+    amazon.aws.iam_access_key_info:
+      user_name: "{{ iam_user }}"
+    register: iam_info
+
+  - name: Display the existing IAM user access keys
+    ansible.builtin.debug:
+      msg:
+        - "{{ iam_info }}"
+
+  - name: rotate keys
+    amazon.aws.iam_access_key:
+      user_name: "{{ iam_user }}"
+      active: true
+      rotate_keys: true
+
+  - name: Query existing IAM user access keys
+    amazon.aws.iam_access_key_info:
+      user_name: "{{ iam_user }}"
+    register: iam_info
+
+  - name: Display the existing IAM user access keys
+    ansible.builtin.debug:
+      msg:
+        - "{{ iam_info }}"
+
+  - name: set access key
+    set_fact:
+      access_key: "{{ iam_info.access_keys[0].access_key_id }}"
+
+  - name: Display the access key
+    ansible.builtin.debug:
+      msg:
+        - "{{ access_key }}"
+
+  - name: deactiveate
+    amazon.aws.iam_access_key:
+      user_name: "{{ iam_user }}"
+      active: false
+      id: "{{ access_key }}"
+
+  - name: Query existing IAM user access keys
+    amazon.aws.iam_access_key_info:
+      user_name: "{{ iam_user }}"
+    register: iam_info
+
+  - name: Display the existing IAM user access keys
+    ansible.builtin.debug:
+      msg:
+        - "{{ iam_info }}"
+
+
+ 
+ 
